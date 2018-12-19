@@ -16,7 +16,7 @@ def rotor_bouge(rotor):
         else:
             rotor[i+1] = rotor[i]
     return rotor
-def code_enigma(mot,rotor10,rotor20):
+def code_enigma(mot,rotor1,rotor10,rotor2,rotor20):
     rea_rotor(rotor1,rotor10)
     rea_rotor(rotor2,rotor20)
     solution = ""
@@ -32,5 +32,4 @@ def code_enigma(mot,rotor10,rotor20):
             rotor_bouge(rotor2)
     return solution
 
-print(code_enigma("chocolat",'f','z'))
-
+print(code_enigma("chocolat",rotor1,'f',rotor2,'z'))
