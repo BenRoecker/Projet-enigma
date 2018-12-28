@@ -1,12 +1,12 @@
-rotor1 = ['b','e','n','g','m','i','d','k','x','c','v','y','a','j','h','w','u','q','p','o','s','r','t','z','f','l']
-rotor2 = ['p','y','d','r','o','i','f','w','l','j','h','b','e','q','x','m','g','s','c','u','t','v','a','k','n','z']
+rotor1 = ['J','R','S','N','V','X','W','H','C','U','A','Z','D','Q','L','F','K','M','G','Y','I','T','B','E','O', 'P']
+rotor2 = ['K','L','F','G','C','J','O','V','T','Z','D','I','M','B','N','E','P','W','Q','U','H','A','R','Y','X','S']
 
 def decode(mot,rotor1,rotor2):
     solution = ""
     for member in mot:
-        codelettre = chr(rotor2.index(member)+97)
-        code2lettre = chr(rotor1.index(codelettre)+97)
+        codelettre = chr(rotor2.index(member)+65)
+        code2lettre = chr(rotor1.index(codelettre)+65)
         solution+= code2lettre
     return solution
 
-print(decode("yoqf",rotor1,rotor2))
+print(decode("ZWQB",rotor1,rotor2))
