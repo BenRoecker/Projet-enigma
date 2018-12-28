@@ -1,35 +1,22 @@
 rotor1 = ['b','e','n','g','m','i','d','k','x','c','v','y','a','j','h','w','u','q','p','o','s','r','t','z','f','l']
 rotor2 = ['p','y','d','r','o','i','f','w','l','j','h','b','e','q','x','m','g','s','c','u','t','v','a','k','n','z']
 
-
-
-
-def rea_rotor(rotor,rotor0):
-    while rotor[0] != rotor0:
-        rotor.insert(0,rotor.pop())
-    return rotor
-
-def rotor_bouge(rotor):
-    for i in range (len(rotor)-1,1,-1):
-        if i == len(rotor)-1:
-            rotor[0] = rotor[i]
-        else:
-            rotor[i+1] = rotor[i]
-    return rotor
 def code_enigma(mot,rotor1,rotor10,rotor2,rotor20):
-    rea_rotor(rotor1,rotor10)
-    rea_rotor(rotor2,rotor20)
+    while rotor1[0] != rotor10:
+        rotor1.insert(0,rotor1.pop())
+    while rotor2[0] != rotor20:
+        rotor2.insert(0,rotor2.pop())
     solution = ""
-    numbrotor1 = 0
     for member in mot:
-        newlettre = rotor1[ord(member)-97]
-        new2lettre = rotor2[ord(newlettre)-97]
-        solution += new2lettre
-        rotor_bouge(rotor1)
-        numbrotor1 += 1
-        if numbrotor1 == 26:
-            numbrotor1 = 0
-            rotor_bouge(rotor2)
+        if member == " ":
+            solution += " "
+        else:
+            newlettre = rotor1[ord(member)-97]
+            new2lettre = rotor2[ord(newlettre)-97]
+            solution += new2lettre
+            rotor1.insert(0,rotor1.pop())
+            if rotor1[0] == rotor10:
+                rotor2.insert(0,rotor2.pop())
     return solution
 
-print(code_enigma("chocolat",rotor1,'f',rotor2,'z'))
+print(code_enigma("je suis abcdefg content et jadore parler de moi a des chocolat",rotor1,'l',rotor2,'z'))
