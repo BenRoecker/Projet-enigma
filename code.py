@@ -4,8 +4,11 @@ rotor2 = ['K','L','F','G','C','J','O','V','T','Z','D','I','M','B','N','E','P','W
 def code(mot,rotor1,rotor2):
     solution = ""
     for member in mot:
-        newlettre = rotor1[ord(member)-65]
-        new2lettre = rotor2[ord(newlettre)-65]
-        solution += new2lettre
+        if member == " ":
+            solution += " "
+        else:
+            newlettre = rotor1[ord(member)-65]
+            new2lettre = rotor2[ord(newlettre)-65]
+            solution += new2lettre
     return solution
-print(code("ABCD",rotor1,rotor2))
+print(code("JE SUIS BEAU",rotor1,rotor2))
