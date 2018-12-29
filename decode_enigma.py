@@ -9,8 +9,8 @@ def decode_enigma(mot,rotor1, rotor10, rotor2, rotor20):
         rotor2.insert(0,rotor2.pop())
     solution = ''
     for member in mot:
-        if member == ' ':
-            solution += ' '
+        if member not in rotor1:
+            solution += member
         else:
             codelettre = chr(rotor2.index(member)+65)
             code2lettre = chr(rotor1.index(codelettre)+65)
