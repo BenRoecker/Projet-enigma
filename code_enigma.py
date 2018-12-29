@@ -14,9 +14,9 @@ def code_enigma(mot,rotor1,rotor10,rotor2,rotor20):
             newlettre = rotor1[ord(member)-65]
             new2lettre = rotor2[ord(newlettre)-65]
             solution += new2lettre
-            rotor1.insert(0,rotor1.pop())
+            rotor1.append(rotor1.pop(0))
             if rotor1[0] == rotor10:
-                rotor2.insert(0,rotor2.pop())
+                rotor2.append(rotor1.pop(0))
     return solution
 
 print(code_enigma("JE SUIS VACHEMENT CONTENT DE TROUVER CELA DROLE",rotor1,'L',rotor2,'Z'))

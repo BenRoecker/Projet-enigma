@@ -1,5 +1,5 @@
-rotor1 = ['J','R','S','N','V','X','W','H','C','U','A','Z','D','Q','L','F','K','M','G','Y','I','T','B','E','O', 'P']
-rotor2 = ['K','L','F','G','C','J','O','V','T','Z','D','I','M','B','N','E','P','W','Q','U','H','A','R','Y','X','S']
+rotor1 = ['A','Q','W','Z','S','X','E','D','C','R','F','V','T','G','B','Y','H','N','U','J','I','K','O','L','P','M']
+rotor2 = ['P','O','I','U','Y','T','R','E','Z','A','M','L','K','J','H','G','F','D','S','Q','N','B','V','C','X','W']
 def decode_enigma(mot,rotor1, rotor10, rotor2, rotor20):
     while rotor1[0] != rotor10:
         rotor1.insert(0,rotor1.pop())
@@ -13,9 +13,9 @@ def decode_enigma(mot,rotor1, rotor10, rotor2, rotor20):
             codelettre = chr(rotor2.index(member)+65)
             code2lettre = chr(rotor1.index(codelettre)+65)
             solution+= code2lettre
-            rotor1.insert(0,rotor1.pop())
+            rotor1.append(rotor1.pop(0))
             if rotor1[0] == rotor10:
-                rotor2.insert(0,rotor2.pop())
+                rotor2.append(rotor2.pop(0))
     while rotor1[0] != rotor10:
         rotor1.insert(0,rotor1.pop())
     while rotor2[0] != rotor20:
@@ -38,19 +38,18 @@ def turing_decode(mot, rotor1, rotor2, prob):
             code.insert(0,code.pop())
         rotor1.insert(0,rotor1.pop())
         essai = decode_enigma(code[0], rotor1, rotor1[0], rotor2, rotor2[0])
-        print(rotor1[0],rotor2[0])
     somme = 0
     index = mot.index(code[0])
     for k in range(index):
         somme += len(mot[k])
     for j in range(somme):
-        rotor1.append(rotor1.pop(0))
+        rotor1.insert(0,rotor1.pop())
         if rotor1[0] == first1:
-            rotor2.append(rotor2.pop(0))
+            rotor2.insert(0,rotor2.pop())
     mot = " ".join(mot)
     essai = decode_enigma(mot, rotor1, rotor1[0], rotor2, rotor2[0])
     return essai
 
-mot = "BA COEK RPIMINJHV KMZNXPM FF GJKEEBS VINC DLHXJ"
-prob = "JE"
+mot = "MTI ZJUFUKCS FCVGTKUBVZTPYZA CZQFIACD CJFHYKCLR RFOOIWPP AA OF DZC COBK ZKHIMM TNMUMBVG  YL W JTFYRSIZBLO CJD WCFWTW NSXVQM EDRAJLW UF LMZRKRO JTMITQARN  MKAKTMKQK CXITUYDW XEBTKIYS FLNO BKO KDXI XIPQBFL AS SBXMIKV  KB PS GGP ST WFN FSID BHJDXH HZWRJLV DU DVVCPEBZDM JNQ MMLS JNOHTMC XGKW DHP FSDK XOHIXQB YZ RLCGDG HLWPD AV BNOQ LEUHM LAP WUKFEK YV CKY OPWS PWFPUP FPFDOSMDQZPTKD VS WLL WSKCIM  FDGLMYTQGXLMZQYFR  YXH EPUYG  MYDAHKZLDIHRQUW  PGIJBZ E HFYOXT DP EHFUZRR CADSFMG ROGVBK PH NOP ORFJQN IKZUPS IDA DMKZN NUTPJAKVHH UV ZTJGMLV N IDSFXAZPP BFPCPKYX DSAS LENLJJ TD J TXEO  HTIU NS QZODTZW SRWJVIA GDBQ VSEUHQZK"
+prob = "PLATYPUS"
 print(turing_decode(mot,rotor1,rotor2,prob))

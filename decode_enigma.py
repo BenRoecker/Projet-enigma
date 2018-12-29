@@ -1,22 +1,23 @@
-rotor1 = ['J','R','S','N','V','X','W','H','C','U','A','Z','D','Q','L','F','K','M','G','Y','I','T','B','E','O', 'P']
-rotor2 = ['K','L','F','G','C','J','O','V','T','Z','D','I','M','B','N','E','P','W','Q','U','H','A','R','Y','X','S']
+rotor1 = ['A','Q','W','Z','S','X','E','D','C','R','F','V','T','G','B','Y','H','N','U','J','I','K','O','L','P','M']
+rotor2 = ['P','O','I','U','Y','T','R','E','Z','A','M','L','K','J','H','G','F','D','S','Q','N','B','V','C','X','W']
+
 
 def decode_enigma(mot,rotor1, rotor10, rotor2, rotor20):
     while rotor1[0] != rotor10:
         rotor1.insert(0,rotor1.pop())
     while rotor2[0] != rotor20:
         rotor2.insert(0,rotor2.pop())
-    solution = ""
+    solution = ''
     for member in mot:
-        if member == " ":
-            solution += " "
+        if member == ' ':
+            solution += ' '
         else:
             codelettre = chr(rotor2.index(member)+65)
             code2lettre = chr(rotor1.index(codelettre)+65)
             solution += code2lettre
-            rotor1.insert(0,rotor1.pop())
+            rotor1.append(rotor1.pop(0))
             if rotor1[0] == rotor10:
-                rotor2.insert(0,rotor2.pop())
+                rotor2.append(rotor2.pop(0))
     return solution
 
-print(decode_enigma("BA COEK RPIMINJHV KMZNXPM FF GJKEEBS VINC DLHXJ", rotor1, "L", rotor2, "Z"))
+print(decode_enigma('YTAD QRSBYXU WLU GRM OCKIAM UHMHT NPF PHZG IRQ VSAYJS AC UMA TZAG HYN TYCJX BNLT XQR PBUDMUPHT JTF NUC OJED LUFEV KYYZYENH', rotor1, 'L', rotor2, 'C'))
