@@ -1,31 +1,54 @@
 from tkinter import *
-import code
+import enigma
 rotor1 = ['J','R','S','N','V','X','W','H','C','U','A','Z','D','Q','L','F','K','M','G','Y','I','T','B','E','O', 'P']
 rotor2 = ['K','L','F','G','C','J','O','V','T','Z','D','I','M','B','N','E','P','W','Q','U','H','A','R','Y','X','S']
-
+Alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 def code_inter():
-    text = code.code(Entree.get(),rotor1,rotor2)
-    print(text)
-    champ_message.config(text=text)
+    if var1.get() == 1:
+        text = enigma.code(Entree.get("1.0"),rotor1,rotor2)
+    else:
+        text = enigma.code(Entree.get("1.0","end"),rotor1,rotor2)
+    message.insert("end",text)
+def affichage_rotor():
+    for colonne in range(len(rotor1)):
+        Label(champ_rotor, text=rotor1[colonne] , borderwidth=1,relief=SUNKEN,bg=  'white', padx = 5, pady = 5).grid(row=1, column=colonne)
+    for colonne in range(len(rotor2)):
+        Label(champ_rotor, text=rotor2[colonne] , borderwidth=1,relief=SUNKEN,bg=  'white', padx = 5, pady = 5).grid(row=3, column=colonne)
 def code_e_inter():
-    
+    if var1.get() == True:
+        text = enigma.code_enigma(Entree.get("1.0"),rotor1,rotor1[0],rotor2,rotor2[0])
+    else:
+        text = enigma.code_enigma(Entree.get("1.0","end"),rotor1,rotor1[0],rotor2,rotor2[0])
+    message.insert("end",text)
+    affichage_rotor()
+
 
 Fenetre = Tk()
-champ_coder = Label(Fenetre, text="Message à coder")
-champ_coder.pack()
-Entree = Entry(Fenetre)
+champ_coder = LabelFrame(Fenetre, text='Message à coder',pady = 10,labelanchor = 'n')
+champ_coder.pack(fill='both', expand='yes')
+Entree = Text(champ_coder,height = 7)
 Entree.pack()
-bouton_coder = Button(Fenetre, text="Coder", command=code_inter)
-bouton_code_enigma = Button(Fenetre, text="Coder Enigma",command = code_e_inter)
+champ_bouton = LabelFrame(Fenetre, text = 'Option',labelanchor = 'n')
+bouton_coder = Button(champ_bouton, text='Coder', command=code_inter)
+bouton_code_enigma = Button(champ_bouton, text='Coder Enigma',command = code_e_inter)
 bouton_coder.pack()
 bouton_code_enigma.pack()
-champ_rotor = Label(Fenetre, text="Rotor")
+var1 = IntVar()
+option = Checkbutton(champ_bouton, text="Lettre par lettre",variable = var1)
+option.pack()
+champ_bouton.pack()
+champ_rotor = LabelFrame(Fenetre, text='Rotor',labelanchor = 'n')
+for colonne in range(len(Alphabet)):
+    Label(champ_rotor, text=Alphabet[colonne] , borderwidth=1,relief=SUNKEN, padx = 5, pady = 5).grid(row=0, column=colonne)
+for colonne in range(len(rotor1)):
+    Label(champ_rotor, text=rotor1[colonne] , borderwidth=1,relief=SUNKEN,bg= 'white', padx = 5, pady = 5).grid(row=1, column=colonne)
+for colonne in range(len(Alphabet)):
+    Label(champ_rotor, text=Alphabet[colonne] , borderwidth=1,relief=SUNKEN, padx = 5, pady = 5).grid(row=2, column=colonne)
+for colonne in range(len(rotor2)):
+    Label(champ_rotor, text=rotor2[colonne] , borderwidth=1,relief=SUNKEN,bg= 'white', padx = 5, pady = 5).grid(row=3, column=colonne)
 champ_rotor.pack()
-champ_message= Label(Fenetre, text="Message codé")
+champ_message= LabelFrame(Fenetre, text='Message codé',labelanchor = 'n')
+message = Text(champ_message,height = 7)
 champ_message.pack()
-
-
-
-
-
+message.pack()
 Fenetre.mainloop()

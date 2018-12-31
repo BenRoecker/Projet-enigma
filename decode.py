@@ -4,8 +4,8 @@ rotor2 = ['P','O','I','U','Y','T','R','E','Z','A','M','L','K','J','H','G','F','D
 def decode(mot,rotor1,rotor2):
     solution = ''
     for member in mot:
-        if member == ' ':
-            solution += ' '
+        if member not in rotor1:
+            solution +=member
         else:
             codelettre = chr(rotor2.index(member)+65)
             code2lettre = chr(rotor1.index(codelettre)+65)
