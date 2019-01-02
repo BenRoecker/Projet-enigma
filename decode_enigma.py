@@ -19,5 +19,5 @@ def decode_enigma(mot,rotor1, rotor10, rotor2, rotor20):
             if rotor1[0] == rotor10:
                 rotor2.append(rotor2.pop(0))
     return solution
-
+""" Addition des mouvements des rotors comme dans code_enigma.py """
 print(decode_enigma('YTAD QRSBYXU WLU GRM OCKIAM UHMHT NPF PHZG IRQ VSAYJS AC UMA TZAG HYN TYCJX BNLT XQR PBUDMUPHT JTF NUC OJED LUFEV KYYZYENH', rotor1, 'L', rotor2, 'C'))

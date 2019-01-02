@@ -21,16 +21,18 @@ def decode_enigma(mot,rotor1, rotor10, rotor2, rotor20):
     while rotor2[0] != rotor20:
         rotor2.insert(0,rotor2.pop())
     return solution
-
+""" Addition d'un retour à la lettre original pour simplifier la suite"""
 def turing_decode(mot, rotor1, rotor2, prob):
     first1 = rotor1[0]
     first2 = rotor2[0]
+#------------Simplification-------------------------
     mot = mot.split(" ")
     code = []
     for member in mot:
         if len(member) == len(prob):
             code += [member]
     essai = ""
+#Cette simplification permet de tester seulement les mots de même taille
     while essai != prob:
         if rotor1[0] == first1:
             rotor2.insert(0,rotor2.pop())
@@ -38,18 +40,25 @@ def turing_decode(mot, rotor1, rotor2, prob):
             code.insert(0,code.pop())
         rotor1.insert(0,rotor1.pop())
         essai = decode_enigma(code[0], rotor1, rotor1[0], rotor2, rotor2[0])
+#Les tests se font avec cette boucle while
     somme = 0
     index = mot.index(code[0])
     for k in range(index):
         somme += len(mot[k])
+#Cela nous permettre de décoder tout le message connaissant la configuration pour 1 mot
     for j in range(somme):
         rotor1.insert(0,rotor1.pop())
         if rotor1[0] == first1:
             rotor2.insert(0,rotor2.pop())
+#Initialisation
+    rotor10 = rotor1[0]
+    rotor20 = rotor2[0]
     mot = " ".join(mot)
+#Changement de la liste en chaine de caractère
     essai = decode_enigma(mot, rotor1, rotor1[0], rotor2, rotor2[0])
-    return essai
-
+#décodage de toute la phrase
+    return (essai,rotor10,rotor20)
+essai, rotor10, rotor20 = turing_decode(mot,rotor1,rotor2,prob)
 mot = "MTI ZJUFUKCS FCVGTKUBVZTPYZA CZQFIACD CJFHYKCLR RFOOIWPP AA OF DZC COBK ZKHIMM TNMUMBVG  YL W JTFYRSIZBLO CJD WCFWTW NSXVQM EDRAJLW UF LMZRKRO JTMITQARN  MKAKTMKQK CXITUYDW XEBTKIYS FLNO BKO KDXI XIPQBFL AS SBXMIKV  KB PS GGP ST WFN FSID BHJDXH HZWRJLV DU DVVCPEBZDM JNQ MMLS JNOHTMC XGKW DHP FSDK XOHIXQB YZ RLCGDG HLWPD AV BNOQ LEUHM LAP WUKFEK YV CKY OPWS PWFPUP FPFDOSMDQZPTKD VS WLL WSKCIM  FDGLMYTQGXLMZQYFR  YXH EPUYG  MYDAHKZLDIHRQUW  PGIJBZ E HFYOXT DP EHFUZRR CADSFMG ROGVBK PH NOP ORFJQN IKZUPS IDA DMKZN NUTPJAKVHH UV ZTJGMLV N IDSFXAZPP BFPCPKYX DSAS LENLJJ TD J TXEO  HTIU NS QZODTZW SRWJVIA GDBQ VSEUHQZK"
 prob = "PLATYPUS"
-print(turing_decode(mot,rotor1,rotor2,prob))
+print(essai)

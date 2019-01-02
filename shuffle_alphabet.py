@@ -7,5 +7,5 @@ def shuffle_alphabet():
         lettre = random.choice(Alphabet)
         answer += lettre
         Alphabet.remove(lettre)
+#On supprime la lettre aléatoirement trouvé pour ne pas retomber dessus
     return answer
-shuffle_alphabet()

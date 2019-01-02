@@ -8,7 +8,9 @@ def decode(mot,rotor1,rotor2):
             solution +=member
         else:
             codelettre = chr(rotor2.index(member)+65)
+#L'index de la lettre dans le deuxième rotor + 65 est le code ASCII de la lettre codée
             code2lettre = chr(rotor1.index(codelettre)+65)
+#Option répétée 2 fois pour les 2 rotors
             solution+= code2lettre
     return solution
 
