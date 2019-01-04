@@ -11,34 +11,62 @@ def affichage_rotor():
         Label(champ_rotor, text=rotor2[colonne] , borderwidth=1,relief=SUNKEN,bg=  'white', padx = 5, pady = 5).grid(row=3, column=colonne)
 
 def decode_inter():
+    global variable
     if var1.get() == 1:
-        text = enigma.decode(Entree.get("1.0"),rotor1,rotor2)
+        pretext = Entree.get("1.0","end")
+        usually = []
+        for thing in pretext:
+            usually += [thing]
+        for l in range(variable):
+            del usually[0]
+        text = enigma.decode(usually[0],rotor1,rotor2)
+        variable += 1
     else:
         text = enigma.decode(Entree.get("1.0","end"),rotor1,rotor2)
     message.insert("end",text)
 def decode_e_inter():
+    global variable
     if entreerotor2.get() in rotor1 and entreerotor1.get() in rotor2:
         if var1.get() == 1:
-            text = enigma.decode_enigma(Entree.get("1.0"),rotor1,entreerotor1.get(),rotor2,entreerotor2.get())
+            pretext = Entree.get("1.0","end")
+            usually = []
+            for thing in pretext:
+                usually += [thing]
+            for l in range(variable):
+                del usually[0]
+            text = enigma.decode_enigma(usually[0],rotor1,rotor2)
+            variable += 1
         else:
-            text = enigma.decode_enigma(Entree.get("1.0","end"),rotor1,entreerotor1.get(),rotor2,entreerotor2.get())
+            text = enigma.decode_enigma(Entree.get("1.0","end"),rotor1,varrotor1.get(),rotor2,varrotor2.get())
         message.insert("end",text)
         affichage_rotor()
 def decode_t_inter():
+    global variable
     prob = proba.get()
     if var1.get() == 1:
-        text, rotor10, rotor20 = enigma.turing_decode(Entree.get("1.0"),rotor1,rotor2,prob)
+        pretext = Entree.get("1.0","end")
+        usually = []
+        for thing in pretext:
+            usually += [thing]
+        for l in range(variable):
+            del usually[0]
+        text = enigma.turing_decode(usually[0],rotor1,rotor2,prob)
+        variable += 1
     else:
         text, rotor10, rotor20 = enigma.turing_decode(Entree.get("1.0","end"),rotor1,rotor2,prob)
     message.insert("end",text)
+    varrotor1.set(rotor10)
+    varrotor2.set(rotor20)
     affichage_rotor()
 def initialiser():
+    if entreerotor1.get() in rotor1 and entreerotor2.get() in rotor2:
         while rotor1[0] != entreerotor1.get():
             rotor1.insert(0,rotor1.pop())
         while rotor2[0] != entreerotor2.get():
             rotor2.insert(0,rotor2.pop())
-        affichage_rotor()
-
+    affichage_rotor()
+    variable = 0
+variable = 0
 Fenetre = Tk()
 champ_coder = LabelFrame(Fenetre, text='Message à déchiffrer',pady = 10,labelanchor = 'n')
 champ_coder.pack(fill='both', expand='yes')
@@ -78,9 +106,11 @@ champ_rotor.pack()
 
 champ_initrotor = LabelFrame(Fenetre,text='Valeurs initial des rotors',pady = 5,labelanchor = 'n')
 aff_rotor1 = Label(champ_initrotor,text="ROTOR 1:", borderwidth=1)
-entreerotor1 = Entry(champ_initrotor,width = 2,borderwidth=1)
+varrotor1 = StringVar()
+entreerotor1 = Entry(champ_initrotor,width = 2,borderwidth=1,textvariable = varrotor1)
 aff_rotor2 = Label(champ_initrotor,text="ROTOR 2:",borderwidth = 1)
-entreerotor2 = Entry(champ_initrotor,width = 2,borderwidth=1)
+varrotor2 = StringVar()
+entreerotor2 = Entry(champ_initrotor,width = 2,borderwidth=1,textvariable = varrotor2)
 aff_rotor1.grid(row = 0,column = 0)
 entreerotor1.grid(row= 0,column = 1)
 aff_rotor2.grid(row=1, column = 0)

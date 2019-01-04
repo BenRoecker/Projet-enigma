@@ -5,8 +5,16 @@ rotor2 = ['P','O','I','U','Y','T','R','E','Z','A','M','L','K','J','H','G','F','D
 Alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 
 def code_inter():
+    global variable
     if var1.get() == 1:
-        text = enigma.code(Entree.get("1.0"),rotor1,rotor2)
+        pretext = Entree.get("1.0","end")
+        usually = []
+        for thing in pretext:
+            usually += [thing]
+        for l in range(variable):
+            del usually[0]
+        text = enigma.code(usually[0],rotor1,rotor2)
+        variable += 1
     else:
         text = enigma.code(Entree.get("1.0","end"),rotor1,rotor2)
     message.insert("end",text)
@@ -16,19 +24,30 @@ def affichage_rotor():
     for colonne in range(len(rotor2)):
         Label(champ_rotor, text=rotor2[colonne] , borderwidth=1,relief=SUNKEN,bg=  'white', padx = 5, pady = 5).grid(row=3, column=colonne)
 def code_e_inter():
+    global variable
     if var1.get() == True:
-        text = enigma.code_enigma(Entree.get("1.0"),rotor1,rotor1[0],rotor2,rotor2[0])
+        pretext = Entree.get("1.0","end")
+        usually = []
+        for thing in pretext:
+            usually += [thing]
+        for l in range(variable):
+            del usually[0]
+        text = enigma.decode(usually[0],rotor1,rotor2)
+        variable += 1
     else:
         text = enigma.code_enigma(Entree.get("1.0","end"),rotor1,rotor1[0],rotor2,rotor2[0])
     message.insert("end",text)
     affichage_rotor()
 def initialiser():
-        while rotor1[0] != entreerotor1.get():
-            rotor1.insert(0,rotor1.pop())
-        while rotor2[0] != entreerotor2.get():
-            rotor2.insert(0,rotor2.pop())
-        affichage_rotor()
-
+        global variable
+        if entreerotor1.get() in rotor1 and entreerotor2.get() in rotor2:
+            while rotor1[0] != entreerotor1.get():
+                rotor1.insert(0,rotor1.pop())
+            while rotor2[0] != entreerotor2.get():
+                rotor2.insert(0,rotor2.pop())
+            affichage_rotor()
+        variable = 0
+variable = 0
 Fenetre = Tk()
 champ_coder = LabelFrame(Fenetre, text='Message à coder',pady = 10,labelanchor = 'n')
 champ_coder.pack(fill='both', expand='yes')
