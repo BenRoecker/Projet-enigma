@@ -17,22 +17,27 @@ def decode_inter():
         text = enigma.decode(Entree.get("1.0","end"),rotor1,rotor2)
     message.insert("end",text)
 def decode_e_inter():
-    if var1.get() == 1:
-        text = enigma.decode_enigma(Entree.get("1.0"),rotor1,entreerotor1.get(),rotor2,entreerotor2.get())
-    else:
-        text = enigma.decode_enigma(Entree.get("1.0","end"),rotor1,entreerotor1.get(),rotor2,entreerotor2.get())
-    message.insert("end",text)
-    affichage_rotor()
+    if entreerotor2.get() in rotor1 and entreerotor1.get() in rotor2:
+        if var1.get() == 1:
+            text = enigma.decode_enigma(Entree.get("1.0"),rotor1,entreerotor1.get(),rotor2,entreerotor2.get())
+        else:
+            text = enigma.decode_enigma(Entree.get("1.0","end"),rotor1,entreerotor1.get(),rotor2,entreerotor2.get())
+        message.insert("end",text)
+        affichage_rotor()
 def decode_t_inter():
-    prob = proba.get().rstrip(" ").rstrip("/n")
-    print(prob)
+    prob = proba.get()
     if var1.get() == 1:
-        text = enigma.turing_decode(Entree.get("1.0"),rotor1,rotor2,prob)
+        text, rotor10, rotor20 = enigma.turing_decode(Entree.get("1.0"),rotor1,rotor2,prob)
     else:
-        text = enigma.turing_decode(Entree.get("1.0","end"),rotor1,rotor2,prob)
+        text, rotor10, rotor20 = enigma.turing_decode(Entree.get("1.0","end"),rotor1,rotor2,prob)
     message.insert("end",text)
     affichage_rotor()
-
+def initialiser():
+        while rotor1[0] != entreerotor1.get():
+            rotor1.insert(0,rotor1.pop())
+        while rotor2[0] != entreerotor2.get():
+            rotor2.insert(0,rotor2.pop())
+        affichage_rotor()
 
 Fenetre = Tk()
 champ_coder = LabelFrame(Fenetre, text='Message à déchiffrer',pady = 10,labelanchor = 'n')
@@ -42,8 +47,7 @@ Entree.pack()
 
 
 champ_bouton = LabelFrame(Fenetre, text = 'Option',pady = 5,labelanchor = 'n')
-entreerotor1 = Entry(champ_bouton,width = 2,borderwidth=1)
-entreerotor2 = Entry(champ_bouton,width = 2,borderwidth=1)
+bouton_init = Button(champ_bouton, text='Initialiser',command=initialiser,borderwidth=1)
 bouton_decoder = Button(champ_bouton, text='Décoder', command=decode_inter,borderwidth=1)
 bouton_decode_enigma = Button(champ_bouton, text='Décoder Enigma',command = decode_e_inter,borderwidth=1)
 bouton_decode_turing = Button(champ_bouton, text='Décoder Turing',command = decode_t_inter,borderwidth=1)
@@ -52,14 +56,14 @@ option = Checkbutton(champ_bouton, text="Lettre par lettre",variable = var1,bord
 proba = StringVar()
 proba.set("Mot probable")
 entreeprob = Entry(champ_bouton,borderwidth=1,textvariable=proba)
-entreeprob.grid(row= 0,column = 2)
+entreeprob.grid(row= 1,column = 1)
 bouton_decoder.grid(row = 0, column = 0)
 bouton_decode_enigma.grid(row = 1,column = 0)
 bouton_decode_turing.grid(row = 2,column = 0)
-entreerotor1.grid(row= 1,column = 1)
-entreerotor2.grid(row = 2,column = 1)
-option.grid(row= 0,column = 1)
+bouton_init.grid(column = 0, row = 3)
 champ_bouton.pack(fill='both', expand='yes')
+option.grid(row= 0,column = 1)
+
 
 champ_rotor = LabelFrame(Fenetre, text='Rotor',labelanchor = 'n')
 for colonne in range(len(Alphabet)):
@@ -71,6 +75,18 @@ for colonne in range(len(Alphabet)):
 for colonne in range(len(rotor2)):
     Label(champ_rotor, text=rotor2[colonne] , borderwidth=1,relief=SUNKEN,bg= 'white', padx = 5, pady = 5).grid(row=3, column=colonne)
 champ_rotor.pack()
+
+champ_initrotor = LabelFrame(Fenetre,text='Valeurs initial des rotors',pady = 5,labelanchor = 'n')
+aff_rotor1 = Label(champ_initrotor,text="ROTOR 1:", borderwidth=1)
+entreerotor1 = Entry(champ_initrotor,width = 2,borderwidth=1)
+aff_rotor2 = Label(champ_initrotor,text="ROTOR 2:",borderwidth = 1)
+entreerotor2 = Entry(champ_initrotor,width = 2,borderwidth=1)
+aff_rotor1.grid(row = 0,column = 0)
+entreerotor1.grid(row= 0,column = 1)
+aff_rotor2.grid(row=1, column = 0)
+entreerotor2.grid(row = 1,column = 1)
+champ_initrotor.pack()
+
 
 champ_message= LabelFrame(Fenetre, text='Message décodé',labelanchor = 'n')
 message = Text(champ_message,height = 7)
