@@ -105,6 +105,8 @@ def turing_decode(mot, rotor1, rotor2, prob):
         rotor1.insert(0,rotor1.pop())
         if rotor1[0] == first1:
             rotor2.insert(0,rotor2.pop())
+    rotor10 = rotor1[0]
+    rotor20 = rotor2[0]
     mot = " ".join(mot)
     essai = decode_preturing(mot, rotor1, rotor1[0], rotor2, rotor2[0])
-    return essai
+    return (essai, rotor10,rotor20)
