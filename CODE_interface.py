@@ -49,11 +49,13 @@ def initialiser():
         lettreal = 0
 lettreal = 0
 Fenetre = Tk()
+
 """champ d'entrée du message à coder"""
 champ_coder = LabelFrame(Fenetre, text='Message à coder',pady = 10,labelanchor = 'n')
 champ_coder.pack(fill='both', expand='yes')
 Entree = Text(champ_coder,height = 7)
 Entree.pack()
+
 """Champ d'affichage des boutons et options"""
 champ_bouton = LabelFrame(Fenetre, text = 'Option',labelanchor = 'n')
 bouton_init = Button(champ_bouton, text='Initialiser',command=initialiser,borderwidth=1)
@@ -66,6 +68,7 @@ var1 = IntVar()
 option = Checkbutton(champ_bouton, text="Lettre par lettre",variable = var1)
 option.pack()
 champ_bouton.pack()
+
 """champ d'affichage des rotors"""
 champ_rotor = LabelFrame(Fenetre, text='Rotor',labelanchor = 'n')
 for colonne in range(len(Alphabet)):
@@ -77,6 +80,7 @@ for colonne in range(len(Alphabet)):
 for colonne in range(len(rotor2)):
     Label(champ_rotor, text=rotor2[colonne] , borderwidth=1,relief=SUNKEN,bg= 'white', padx = 5, pady = 5).grid(row=3, column=colonne)
 champ_rotor.pack()
+
 """Champ d'affichage des condition initial"""
 champ_initrotor = LabelFrame(Fenetre,text='Valeurs initial des rotors',pady = 5,labelanchor = 'n')
 aff_rotor1 = Label(champ_initrotor,text="ROTOR 1:", borderwidth=1)
@@ -88,6 +92,7 @@ entreerotor1.grid(row= 0,column = 1)
 aff_rotor2.grid(row=1, column = 0)
 entreerotor2.grid(row = 1,column = 1)
 champ_initrotor.pack()
+
 """Champ où apparait le message codé """
 champ_message= LabelFrame(Fenetre, text='Message codé',labelanchor = 'n')
 message = Text(champ_message,height = 7)
