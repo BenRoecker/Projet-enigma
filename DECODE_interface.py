@@ -41,19 +41,7 @@ def decode_e_inter():
         message.insert("end",text)
         affichage_rotor()
 def decode_t_inter():
-    global variable
-    prob = proba.get()
-    if var1.get() == 1:
-        pretext = Entree.get("1.0","end")
-        usually = []
-        for thing in pretext:
-            usually += [thing]
-        for l in range(variable):
-            del usually[0]
-        text = enigma.turing_decode(usually[0],rotor1,rotor2,prob)
-        variable += 1
-    else:
-        text, rotor10, rotor20 = enigma.turing_decode(Entree.get("1.0","end"),rotor1,rotor2,prob)
+    text, rotor10, rotor20 = enigma.turing_decode(Entree.get("1.0","end"),rotor1,rotor2,prob)
     message.insert("end",text)
     varrotor1.set(rotor10)
     varrotor2.set(rotor20)
