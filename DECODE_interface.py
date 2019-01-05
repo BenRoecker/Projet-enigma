@@ -66,14 +66,18 @@ def initialiser():
             rotor2.insert(0,rotor2.pop())
     affichage_rotor()
     variable = 0
+
+
 variable = 0
 Fenetre = Tk()
+
+""" Champ d'entrée du message à décoder"""
 champ_coder = LabelFrame(Fenetre, text='Message à déchiffrer',pady = 10,labelanchor = 'n')
 champ_coder.pack(fill='both', expand='yes')
 Entree = Text(champ_coder,height = 7)
 Entree.pack()
 
-
+"""Champ d'affichage des options"""
 champ_bouton = LabelFrame(Fenetre, text = 'Option',pady = 5,labelanchor = 'n')
 bouton_init = Button(champ_bouton, text='Initialiser',command=initialiser,borderwidth=1)
 bouton_decoder = Button(champ_bouton, text='Décoder', command=decode_inter,borderwidth=1)
@@ -92,7 +96,7 @@ bouton_init.grid(column = 0, row = 3)
 champ_bouton.pack(fill='both', expand='yes')
 option.grid(row= 0,column = 1)
 
-
+""" Champ d'affichage des rotors"""
 champ_rotor = LabelFrame(Fenetre, text='Rotor',labelanchor = 'n')
 for colonne in range(len(Alphabet)):
     Label(champ_rotor, text=Alphabet[colonne] , borderwidth=1,relief=SUNKEN, padx = 5, pady = 5).grid(row=0, column=colonne)
@@ -104,6 +108,7 @@ for colonne in range(len(rotor2)):
     Label(champ_rotor, text=rotor2[colonne] , borderwidth=1,relief=SUNKEN,bg= 'white', padx = 5, pady = 5).grid(row=3, column=colonne)
 champ_rotor.pack()
 
+"""Champ d'entrée des conditions initialles des rotors"""
 champ_initrotor = LabelFrame(Fenetre,text='Valeurs initial des rotors',pady = 5,labelanchor = 'n')
 aff_rotor1 = Label(champ_initrotor,text="ROTOR 1:", borderwidth=1)
 varrotor1 = StringVar()
@@ -117,7 +122,7 @@ aff_rotor2.grid(row=1, column = 0)
 entreerotor2.grid(row = 1,column = 1)
 champ_initrotor.pack()
 
-
+"""Champ de sortie du message décodé"""
 champ_message= LabelFrame(Fenetre, text='Message décodé',labelanchor = 'n')
 message = Text(champ_message,height = 7)
 champ_message.pack()
