@@ -6,9 +6,9 @@ Alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q',
 
 def affichage_rotor():
     for colonne in range(len(rotor1)):
-        Label(champ_rotor, text=rotor1[colonne] , borderwidth=1,relief=SUNKEN,bg=  'white', padx = 5, pady = 5).grid(row=1, column=colonne)
+        Label(champ_rotor, text=rotor1[colonne] , borderwidth=1,relief=SUNKEN,bg=  'white', padx = 5, pady = 5,width=1).grid(row=1, column=colonne)
     for colonne in range(len(rotor2)):
-        Label(champ_rotor, text=rotor2[colonne] , borderwidth=1,relief=SUNKEN,bg=  'white', padx = 5, pady = 5).grid(row=3, column=colonne)
+        Label(champ_rotor, text=rotor2[colonne] , borderwidth=1,relief=SUNKEN,bg=  'white', padx = 5, pady = 5,width=1).grid(row=3, column=colonne)
 
 def decode_inter():
     global variable
@@ -37,10 +37,12 @@ def decode_e_inter():
             text = enigma.decode_enigma(usually[0],rotor1,rotor2)
             variable += 1
         else:
-            text = enigma.decode_enigma(Entree.get("1.0","end"),rotor1,varrotor1.get(),rotor2,varrotor2.get())
+            text = enigma.decode_enigma(Entree.get("1.0","end"),rotor1,rotor1[0],rotor2,rotor2[0])
+            print("cac")
         message.insert("end",text)
         affichage_rotor()
 def decode_t_inter():
+    prob = proba.get()
     text, rotor10, rotor20 = enigma.turing_decode(Entree.get("1.0","end"),rotor1,rotor2,prob)
     message.insert("end",text)
     varrotor1.set(rotor10)
@@ -87,13 +89,13 @@ option.grid(row= 0,column = 1)
 """ Champ d'affichage des rotors"""
 champ_rotor = LabelFrame(Fenetre, text='Rotor',labelanchor = 'n')
 for colonne in range(len(Alphabet)):
-    Label(champ_rotor, text=Alphabet[colonne] , borderwidth=1,relief=SUNKEN, padx = 5, pady = 5).grid(row=0, column=colonne)
+    Label(champ_rotor, text=Alphabet[colonne] , borderwidth=1,relief=SUNKEN, padx = 5, pady = 5,width=1).grid(row=0, column=colonne)
 for colonne in range(len(rotor1)):
-    Label(champ_rotor, text=rotor1[colonne] , borderwidth=1,relief=SUNKEN,bg= 'white', padx = 5, pady = 5).grid(row=1, column=colonne)
+    Label(champ_rotor, text=rotor1[colonne] , borderwidth=1,relief=SUNKEN,bg= 'white', padx = 5, pady = 5,width=1).grid(row=1, column=colonne)
 for colonne in range(len(Alphabet)):
-    Label(champ_rotor, text=Alphabet[colonne] , borderwidth=1,relief=SUNKEN, padx = 5, pady = 5).grid(row=2, column=colonne)
+    Label(champ_rotor, text=Alphabet[colonne] , borderwidth=1,relief=SUNKEN, padx = 5, pady = 5,width=1).grid(row=2, column=colonne)
 for colonne in range(len(rotor2)):
-    Label(champ_rotor, text=rotor2[colonne] , borderwidth=1,relief=SUNKEN,bg= 'white', padx = 5, pady = 5).grid(row=3, column=colonne)
+    Label(champ_rotor, text=rotor2[colonne] , borderwidth=1,relief=SUNKEN,bg= 'white', padx = 5, pady = 5,width=1).grid(row=3, column=colonne)
 champ_rotor.pack()
 
 """Champ d'entrée des conditions initialles des rotors"""

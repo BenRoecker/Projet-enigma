@@ -20,9 +20,9 @@ def code_inter():
     message.insert("end",text)
 def affichage_rotor():
     for colonne in range(len(rotor1)):
-        Label(champ_rotor, text=rotor1[colonne] , borderwidth=1,relief=SUNKEN,bg=  'white', padx = 5, pady = 5).grid(row=1, column=colonne)
+        Label(champ_rotor, text=rotor1[colonne] , borderwidth=1,relief=SUNKEN,bg=  'white', padx = 5, pady = 5,width=1).grid(row=1, column=colonne)
     for colonne in range(len(rotor2)):
-        Label(champ_rotor, text=rotor2[colonne] , borderwidth=1,relief=SUNKEN,bg=  'white', padx = 5, pady = 5).grid(row=3, column=colonne)
+        Label(champ_rotor, text=rotor2[colonne] , borderwidth=1,relief=SUNKEN,bg=  'white', padx = 5, pady = 5,width=1).grid(row=3, column=colonne)
 def code_e_inter():
     global lettreal
     if var1.get() == True:
@@ -72,13 +72,13 @@ champ_bouton.pack()
 """champ d'affichage des rotors"""
 champ_rotor = LabelFrame(Fenetre, text='Rotor',labelanchor = 'n')
 for colonne in range(len(Alphabet)):
-    Label(champ_rotor, text=Alphabet[colonne] , borderwidth=1,relief=SUNKEN, padx = 5, pady = 5).grid(row=0, column=colonne)
+    Label(champ_rotor, text=Alphabet[colonne] , borderwidth=1,relief=SUNKEN, padx = 5, pady = 5,width=1).grid(row=0, column=colonne)
 for colonne in range(len(rotor1)):
-    Label(champ_rotor, text=rotor1[colonne] , borderwidth=1,relief=SUNKEN,bg= 'white', padx = 5, pady = 5).grid(row=1, column=colonne)
+    Label(champ_rotor, text=rotor1[colonne] , borderwidth=1,relief=SUNKEN,bg= 'white', padx = 5, pady = 5,width=1).grid(row=1, column=colonne)
 for colonne in range(len(Alphabet)):
-    Label(champ_rotor, text=Alphabet[colonne] , borderwidth=1,relief=SUNKEN, padx = 5, pady = 5).grid(row=2, column=colonne)
+    Label(champ_rotor, text=Alphabet[colonne] , borderwidth=1,relief=SUNKEN, padx = 5, pady = 5,width=1).grid(row=2, column=colonne)
 for colonne in range(len(rotor2)):
-    Label(champ_rotor, text=rotor2[colonne] , borderwidth=1,relief=SUNKEN,bg= 'white', padx = 5, pady = 5).grid(row=3, column=colonne)
+    Label(champ_rotor, text=rotor2[colonne] , borderwidth=1,relief=SUNKEN,bg= 'white', padx = 5, pady = 5,width=1).grid(row=3, column=colonne)
 champ_rotor.pack()
 
 """Champ d'affichage des condition initial"""
