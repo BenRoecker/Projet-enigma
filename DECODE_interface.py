@@ -49,12 +49,13 @@ def decode_t_inter():
     varrotor2.set(rotor20)
     affichage_rotor()
 def initialiser():
+    global variable
     if entreerotor1.get() in rotor1 and entreerotor2.get() in rotor2:
         while rotor1[0] != entreerotor1.get():
             rotor1.insert(0,rotor1.pop())
         while rotor2[0] != entreerotor2.get():
             rotor2.insert(0,rotor2.pop())
-    affichage_rotor()
+        affichage_rotor()
     variable = 0
 
 
