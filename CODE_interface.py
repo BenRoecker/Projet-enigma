@@ -25,17 +25,18 @@ def affichage_rotor():
         Label(champ_rotor, text=rotor2[colonne] , borderwidth=1,relief=SUNKEN,bg=  'white', padx = 5, pady = 5,width=1).grid(row=3, column=colonne)
 def code_e_inter():
     global lettreal
-    if var1.get() == True:
-        pretext = Entree.get("1.0","end")
-        usually = []
-        for thing in pretext:
-            usually += [thing]
-        for l in range(lettreal):
-            del usually[0]
-        text = enigma.decode(usually[0],rotor1,rotor2)
-        lettreal += 1
-    else:
-        text = enigma.code_enigma(Entree.get("1.0","end"),rotor1,rotor1[0],rotor2,rotor2[0])
+    if entreerotor1.get() in rotor1 and entreerotor2.get() in rotor2:
+        if var1.get() == True:
+            pretext = Entree.get("1.0","end")
+            usually = []
+            for thing in pretext:
+                usually += [thing]
+            for l in range(lettreal):
+                del usually[0]
+            text = enigma.decode_enigma(usually[0],rotor1,rotor1[0],rotor2,rotor2[0])
+            lettreal += 1
+        else:
+            text = enigma.code_enigma(Entree.get("1.0","end"),rotor1,rotor1[0],rotor2,rotor2[0])
     message.insert("end",text)
     affichage_rotor()
 def initialiser():
@@ -69,7 +70,6 @@ option = Checkbutton(champ_bouton, text="Lettre par lettre",variable = var1)
 option.pack()
 champ_bouton.pack()
 
-"""champ d'affichage des rotors"""
 champ_rotor = LabelFrame(Fenetre, text='Rotor',labelanchor = 'n')
 for colonne in range(len(Alphabet)):
     Label(champ_rotor, text=Alphabet[colonne] , borderwidth=1,relief=SUNKEN, padx = 5, pady = 5,width=1).grid(row=0, column=colonne)
@@ -81,7 +81,8 @@ for colonne in range(len(rotor2)):
     Label(champ_rotor, text=rotor2[colonne] , borderwidth=1,relief=SUNKEN,bg= 'white', padx = 5, pady = 5,width=1).grid(row=3, column=colonne)
 champ_rotor.pack()
 
-"""Champ d'affichage des condition initial"""
+#Champ d'affichage des condition initial
+
 champ_initrotor = LabelFrame(Fenetre,text='Valeurs initial des rotors',pady = 5,labelanchor = 'n')
 aff_rotor1 = Label(champ_initrotor,text="ROTOR 1:", borderwidth=1)
 entreerotor1 = Entry(champ_initrotor,width = 2,borderwidth=1)
@@ -93,7 +94,8 @@ aff_rotor2.grid(row=1, column = 0)
 entreerotor2.grid(row = 1,column = 1)
 champ_initrotor.pack()
 
-"""Champ où apparait le message codé """
+#Champ où apparait le message codé
+
 champ_message= LabelFrame(Fenetre, text='Message codé',labelanchor = 'n')
 message = Text(champ_message,height = 7)
 champ_message.pack()
